@@ -6,6 +6,12 @@ import { Pet } from '../models/pet.model.js';
 
 export const search = (req: Request, res: Response): void => {
     const query: string = req.query.q as string;
+
+    if (!query) {
+        res.redirect('/');
+        return;
+    }
+
     const list: PetData[] = Pet.getByName(query);
     const menu: MenuOptions = createMenuOptions('');
 
